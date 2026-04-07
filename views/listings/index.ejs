@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %> 
+<!-- <h3>All Listings</h3>
+<form method="GET" action="/listings/new">
+    <button>Create New Listing</button>
+</form> -->
+
+<style>
+    #filter{
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tax-info{
+        display: none;
+    }
+
+    .tax-toggler{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.5rem;
+        /* margin-left: 5rem; */
+        padding: 1rem;
+    }
+</style>
+
+<div id="filter">
+    <div >
+        <div class="form-switch form-check-reverse tax-toggler">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+        </div>
+    </div>
+
+</div>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <%for(let listing of allListings) {%>
+        <a href="/listings/<%=listing._id%>" class="listing-link">
+        <div class="card col listing-card" >
+            <img src="<%=listing.image.url%>" class="card-img-top" alt="Listing Iamge" style="height: 20rem" >
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+                <p class="card-text"><b><%=listing.title%></b><br>
+                    &#8377; <%=listing.price.toLocaleString("en-In")%>
+                        <i class="tax-info">&nbsp; &nbsp; +18% GST</i>
+                </p>
+                
+            </div>
+        </div>
+        </a>
+
+    <%}%>
+</div>
+
+<script>
+    let taxswitch=document.getElementById("switchCheckDefault");
+    taxswitch.addEventListener("click", () =>{
+        let taxInfo=document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            if(info.style.display!=="inline"){
+                info.style.display="inline";
+            }
+            else{
+                info.style.display="none";
+            }
+        }
+    })
+</script>
+
+
