@@ -59,4 +59,15 @@
     <%}%>
    
     </div>
+    <div class="col-8 offset-2 mt-3 mb-3s">
+        <h3>Where you will be</h3>
+        <div id="map" class="offset-2 mb-3"></div>
+    </div>
 </div>
+<script>
+    const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+    const listingTitle = "<%= listing.title %>";
+    const listingLocation = "<%= listing.location %>";
+</script>
+
+<script src="/js/map.js"></script>

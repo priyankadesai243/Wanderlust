@@ -1,4 +1,5 @@
 const Listing=require("../models/listing.js");
+const axios = require("axios");
 
 module.exports.index=(async (req, res) =>{
     const allListings= await Listing.find();
@@ -32,6 +33,46 @@ module.exports.createListing=async (req, res) =>{
     res.redirect("/listings")
 }
 
+
+module.exports.createListing = async (req, res) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    const newlisting = new Listing(req.body.listing);
+
+    const location = req.body.listing.location;
+    const response = await axios.get(
+        "https://nominatim.openstreetmap.org/search",
+        {
+            params: {
+                q: location,
+                format: "json",
+                limit: 1
+            },
+            headers: {
+                "User-Agent": "WanderLust App"
+            }
+        }
+    );
+    const data = response.data[0];
+    newlisting.geometry = {
+        type: "Point",
+        coordinates: [
+            parseFloat(data.lon),
+            parseFloat(data.lat)
+        ]
+    };
+
+    newlisting.image = { url, filename };
+    newlisting.owner = req.user._id;
+    await newlisting.save();
+    if(response.data.length === 0){
+        req.flash("error","Invalid location");
+        return res.redirect("/listings/new");
+    }
+    req.flash("success", "New Listing Created!");
+    res.redirect("/listings");
+
+};
 module.exports.editlisting=async (req, res) =>{
     let { id }= req.params;
     const listing=await Listing.findById(id);
@@ -40,7 +81,7 @@ module.exports.editlisting=async (req, res) =>{
         res.render("listings");
     }
     let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_200/");
     res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
 

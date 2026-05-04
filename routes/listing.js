@@ -8,6 +8,7 @@ const { isLoogedin, isOwner, validateListing }=require("../middleware.js")
 const { storage }=require("../cloudConfig.js")
 const multer=require("multer");
 const upload=multer({storage});
+const axios = require("axios");
 
 const listingController=require("../controllers/listings.js");
 

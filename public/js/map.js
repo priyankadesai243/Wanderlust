@@ -1,13 +1,17 @@
-const mapDiv = document.getElementById("map");
-const coordinates = JSON.parse(mapDiv.dataset.coordinates);
+document.addEventListener("DOMContentLoaded", function () {
 
-const map = L.map("map").setView([coordinates[1], coordinates[0]], 13);
+    const lng = coordinates[0];   // longitude
+    const lat = coordinates[1];   // latitude
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "© OpenStreetMap contributors"
-}).addTo(map);
+    const map = L.map("map").setView([lat, lng], 13);
 
-L.marker([coordinates[1], coordinates[0]])
-  .addTo(map)
-  .bindPopup("Listing Location")
-  .openPopup();
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    L.marker([lat, lng]).addTo(map)
+   .bindPopup(`<b>${listingTitle}</b><br>📍${listingLocation}
+`)
+    .openPopup();
+
+});
