@@ -3,8 +3,7 @@ WanderLust 🌍
 A full-stack travel listing web application where users can explore destinations, create listings, upload images, review places, and view exact locations on interactive maps.
 
 🚀 Live Demo
-
-WanderLust Live Project
+https://wanderlust-zbe0.onrender.com/?
 
 ✨ Features
 User Authentication & Authorization
