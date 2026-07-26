@@ -4,37 +4,82 @@
     <button>Create New Listing</button>
 </form> -->
 
-<style>
-    #filter{
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-    }
+<div id="filters">
 
-    .tax-info{
-        display: none;
-    }
+    <a href="/listings" class="filter <%= !category ? 'active' : '' %>">
+        <i class="fa-solid fa-globe"></i>
+        <p>All</p>
+    </a>
 
-    .tax-toggler{
-        border: 1px solid black;
-        border-radius: 1rem;
-        height: 3.5rem;
-        /* margin-left: 5rem; */
-        padding: 1rem;
-    }
-</style>
+    <a href="/listings?category=House" class="filter <%= category === 'House' ? 'active' : '' %>">
+        <i class="fa-solid fa-house"></i>
+        <p>House</p>
+    </a>
+    
+    <a href="/listings?category=Villa" class="filter <%= category === 'Villa' ? 'active' : '' %>">
+        <i class="fa-solid fa-building-columns"></i>
+        <p>Villa</p>
+    </a>
+
+    <a href="/listings?category=Hotel" class="filter <%= category === 'Hotel' ? 'active' : '' %>">
+        <i class="fa-solid fa-hotel"></i>
+        <p>Hotel</p>
+    </a>
+
+    <a href="/listings?category=Beach House" class="filter <%= category === 'Beach House' ? 'active' : '' %>">
+        <i class="fa-solid fa-umbrella-beach"></i>
+        <p>Beach House</p>
+    </a>
+
+    <a href="/listings?category=Mountain Retreat" class="filter <%= category === 'Mountain Retreat' ? 'active' : '' %>">
+        <i class="fa-solid fa-mountain"></i>
+        <p>Mountain Retreat</p>
+    </a>
+
+    <a href="/listings?category=Lake View" class="filter <%= category === 'Lake View' ? 'active' : '' %>">
+        <i class="fa-solid fa-water"></i>
+        <p>Lake View</p>
+    </a>
+
+    <a href="/listings?category=Pools" class="filter <%= category === 'Pools' ? 'active' : '' %>">
+        <i class="fa-solid fa-person-swimming"></i>
+        <p>Pools</p>
+    </a>
+
+    <a href="/listings?category=Snow" class="filter <%= category === 'Snow' ? 'active' : '' %>">
+        <i class="fa-regular fa-snowflake"></i>
+        <p>Snow</p>
+    </a>
+
+    <a href="/listings?category=Farm Stay" class="filter <%= category === 'Farm Stay' ? 'active' : '' %>">
+        <i class="fa-solid fa-tractor"></i>
+        <p>Farm Stay</p>
+    </a>
+
+    <a href="/listings?category=Campsite" class="filter <%= category === 'Campsite' ? 'active' : '' %>">
+        <i class="fa-solid fa-campground"></i>
+        <p>Campsite</p>
+    </a>
+
+    <a href="/listings?category=Treehouse" class="filter <%= category === 'Treehouse' ? 'active' : '' %>">
+        <i class="fa-solid fa-tree"></i>
+        <p>Treehouse</p>
+    </a>
+
+</div>
 
 <div id="filter">
-    <div >
-        <div class="form-switch form-check-reverse tax-toggler">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+    <div class="tax-toggle">
+        <div class="form-switch form-check-reverse">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
         </div>
     </div>
 
 </div>
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <%for(let listing of allListings) {%>
         <a href="/listings/<%=listing._id%>" class="listing-link">
         <div class="card col listing-card" >
@@ -52,20 +97,4 @@
 
     <%}%>
 </div>
-
-<script>
-    let taxswitch=document.getElementById("switchCheckDefault");
-    taxswitch.addEventListener("click", () =>{
-        let taxInfo=document.getElementsByClassName("tax-info");
-        for(info of taxInfo){
-            if(info.style.display!=="inline"){
-                info.style.display="inline";
-            }
-            else{
-                info.style.display="none";
-            }
-        }
-    })
-</script>
-
 

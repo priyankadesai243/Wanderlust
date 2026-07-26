@@ -84,7 +84,7 @@ app.use((req, res, next)=>{
 })
 
 app.get("/", (req,res) =>{
-    res.render("root");
+    res.render("root.ejs");
 })
 
 app.use("/listings", listingsRouter);
@@ -99,8 +99,6 @@ app.use((err, req, res, next)=>{
     let { statusCode=500, message="Something Error Occured"}=err
     res.status(statusCode).render("error.ejs", { message });
 })
-
-
 
 app.listen(3030, (req,res) =>{    
     console.log("server is listening to port");

@@ -29,6 +29,13 @@ const listingSchema= new mongoose.Schema({
         required:true
     },
 
+    category: {
+    type: String,
+    enum: ["House","Villa","Hotel","Beach House","Mountain Retreat",
+        "Lake View","Pools","Snow","Farm Stay","Campsite","Treehouse"],
+    required: true
+    },
+
     reviews:[
         {
             type: Schema.Types.ObjectId,

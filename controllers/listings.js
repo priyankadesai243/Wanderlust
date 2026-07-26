@@ -1,10 +1,35 @@
 const Listing=require("../models/listing.js");
 const axios = require("axios");
 
-module.exports.index=(async (req, res) =>{
-    const allListings= await Listing.find();
-    res.render("listings/index.ejs", { allListings });
-})
+module.exports.index = async (req, res) => {
+    const { category, country } = req.query;
+
+    let filter = {};
+
+    if (category) {
+        filter.category = category;
+    }
+
+    if (country) {
+        const words = country.trim().split(/\s+/);
+
+        filter.$and = words.map((word) => ({
+            $or: [
+                { title: { $regex: word, $options: "i" } },
+                { location: { $regex: word, $options: "i" } },
+                { country: { $regex: word, $options: "i" } },
+                { category: { $regex: word, $options: "i" } }
+            ]
+        }));
+    }
+
+    const allListings = await Listing.find(filter);
+
+    res.render("listings/index.ejs", {
+        allListings,
+        category
+    });
+};
 
 module.exports.renderNewForm=(req, res) =>{
     res.render("listings/new.ejs");

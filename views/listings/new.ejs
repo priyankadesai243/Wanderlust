@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-8 offset-2">
+   <div class="row justify-content-center">
+    <div class="col-11 col-md-10 col-lg-8">
             <br>
             <h3>Create a New Listing</h3>
             <div class="mb-3">
@@ -19,7 +19,27 @@
                 
             <div class="mb-3">
                 <label class="form-label" for="image">Upload Image</label>
-                <input name="listing[image]" placeholder="Enter Image URL/Link" type="file" class="form-control" requireds>
+                <input name="listing[image]" placeholder="Enter Image URL/Link" type="file" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select name="listing[category]" class="form-select" required>
+                    <option value="" selected disabled>Select Category</option>
+                    <option value="House">🏠 House</option>
+                    <option value="Villa">🏰 Villa</option>
+                    <option value="Cabin">🏕️ Cabin</option>
+                    <option value="Cottage">🛖 Cottage</option>
+                    <option value="Hotel">🏨 Hotel</option>
+                    <option value="Beach House">🏖️ Beach House</option>
+                    <option value="Mountain Retreat">🌄 Mountain Retreat</option>
+                    <option value="Lake View">🌊 Lake View</option>
+                    <option value="Pools">🏊 Pools</option>
+                    <option value="Snow">❄️ Snow</option>
+                    <option value="Farm Stay">🌳 Farm Stay</option>
+                    <option value="Campsite">🏕️ Campsite</option>
+                    <option value="Treehouse">🌲 Treehouse</option>
+                </select>
             </div>
                 
             <div class="row">

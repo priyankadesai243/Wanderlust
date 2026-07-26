@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
 <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-8 offset-2">
+    <div class="row justify-content-center">
+    <div class="col-11 col-md-10 col-lg-8">
             <br>
             <h3>Edit this Listing</h3>
 
@@ -52,6 +52,26 @@
                 >
                 <div class="invalid-feedback">Please upload a valid image</div>
             </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select name="listing[category]" class="form-select" required>
+                    <option value="">Select Category</option>
+                    <option value="House" <%= listing.category === "House" ? "selected" : "" %>>House</option>
+                    <option value="Villa" <%= listing.category === "Villa" ? "selected" : "" %>>Villa</option>
+                    <option value="Cabin" <%= listing.category === "Cabin" ? "selected" : "" %>>Cabin</option>
+                    <option value="Cottage" <%= listing.category === "Cottage" ? "selected" : "" %>>Cottage</option>
+                    <option value="Hotel" <%= listing.category === "Hotel" ? "selected" : "" %>>Hotel</option>
+                    <option value="Beach House" <%= listing.category === "Beach House" ? "selected" : "" %>>Beach House</option>
+                    <option value="Mountain Retreat" <%= listing.category === "Mountain Retreat" ? "selected" : "" %>>Mountain Retreat</option>
+                    <option value="Lake View" <%= listing.category === "Lake View" ? "selected" : "" %>>Lake View</option>
+                    <option value="Pools" <%= listing.category === "Pools" ? "selected" : "" %>>Pools</option>
+                    <option value="Snow" <%= listing.category === "Snow" ? "selected" : "" %>>Snow</option>
+                    <option value="Farm Stay" <%= listing.category === "Farm Stay" ? "selected" : "" %>>Farm Stay</option>
+                    <option value="Campsite" <%= listing.category === "Campsite" ? "selected" : "" %>>Campsite</option>
+                    <option value="Treehouse" <%= listing.category === "Treehouse" ? "selected" : "" %>>Treehouse</option>
+                </select>
+            </div>
                 
             <!-- Price + Country -->
             <div class="row">
@@ -97,7 +117,7 @@
             </div>
                 
             <!-- Submit -->
-            <button class="btn btn-dark edit-btn">Edit</button>
+           <button class="btn add-btn w-100">Update Listing</button>
             <br><br>
         </div>
     </div>
